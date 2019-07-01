@@ -1,3 +1,4 @@
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -15,6 +16,21 @@ public class HamletParserTest {
 
     @Test
     public void testChangeHamletToLeon() {
+        //Given
+        String nameToSearchFor = "Hamlet";
+        String nameToSubstitute = "Leon";
+        String newHamlet = "";
+
+        //When
+        newHamlet = HamletParser.exactMatch(nameToSearchFor, nameToSubstitute, hamletText);
+        newHamlet = HamletParser.allUpperCaseMatch(nameToSearchFor, nameToSubstitute, newHamlet);
+
+        Boolean containsHamlet = HamletParser.findName(nameToSearchFor, newHamlet);
+        Boolean containsHAMLET = HamletParser.findName(nameToSearchFor.toUpperCase(), newHamlet);
+
+        //Then
+        Assert.assertFalse(containsHamlet);
+        Assert.assertFalse(containsHAMLET);
     }
 
     @Test
